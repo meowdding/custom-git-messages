@@ -13,6 +13,7 @@ import { Action } from "./messages/action.ts";
 import { WebhookMessage } from "https://deno.land/x/dishooks@v1.1.0/types.ts";
 import { postWebhook } from "./webhooks.ts";
 
+
 const handlers: HandlerList = {
     "fork": Fork,
     "push": Push,
@@ -44,8 +45,10 @@ const kv = await Deno.openKv();
 // - build failure on master
 // - changes +/- on commit
 serve(async (request) => {
-    if (request.headers.get("balls")) {
-        createAll();
+    if (!request.url.endsWith(Deno.env.get("secret") || "meow")) {
+        return new Response("{}", { status: 401 });
+    } else if (request.method != "POST") {
+        return new Response("{}", { status: 405 });
     }
 
     const body = await request.json();
