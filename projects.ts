@@ -15,6 +15,7 @@ export const colors: { [project: string]: number } = {
     "bot": 1,
     "meowdding-patches": 1,
     "website": 1,
+    "remote-configs": 1,
 }
 
 export const abbreviations: { [project: string]: string }  = {
@@ -34,6 +35,7 @@ export const abbreviations: { [project: string]: string }  = {
     "bot": "bot",
     "meowdding-patches": "patches",
     "website": "website",
+    "remote-configs": "remote-configs",
 }
 
 export function createAll() {
