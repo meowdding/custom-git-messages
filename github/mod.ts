@@ -52,6 +52,9 @@ export const Github = async (
 
     webhookMessage.embeds?.forEach((embed) => {
         embed.color = color;
+        embed.footer = {
+            text: `Repo: ${message.repo}`
+        }
     });
     webhookMessage.username = `GitHub - ${
         abbreviations[message.repo] || message.repo
