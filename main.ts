@@ -21,7 +21,7 @@ export type ServiceResponse = {
 
 type ServiceList = {
     // deno-lint-ignore no-explicit-any
-    [route: string]: (body: any, request: any) => Promise<ServiceResponse>;
+    [route: string]: (body: any, request: any) => (Promise<ServiceResponse> | ServiceResponse);
 };
 
 // deno-lint-ignore no-explicit-any
