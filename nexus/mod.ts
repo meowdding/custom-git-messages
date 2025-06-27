@@ -11,7 +11,7 @@ const allowedRepositories = [
 ];
 
 const groupArtifactRegex: { [route: string]: string | boolean } = {
-    "tech.thatgravyboat": "Skyblock-api.*|repo-lib",
+    "tech.thatgravyboat": "skyblock-api.*|repo-lib",
     "me.owdding": true,
 };
 
@@ -58,15 +58,15 @@ export const Nexus = (
     const body: request = _body;
 
     if (body.action != actions.CREATED) return;
-    if (!(body.repositoryName in allowedRepositories)) return;
+    if (!(body.repositoryName.toLowerCase() in allowedRepositories)) return;
 
     switch (body.component.format) {
         case componentFormat.MAVEN: {
-            if (!groupArtifactRegex[body.component.group]) return;
-            const condition = groupArtifactRegex[body.component.group];
+            if (!groupArtifactRegex[body.component.group.toLocaleLowerCase()]) return;
+            const condition = groupArtifactRegex[body.component.group.toLowerCase()];
 
             if (typeof condition === "string") {
-                if (!RegExp(condition).test(body.component.name)) return;
+                if (!RegExp(condition).test(body.component.name.toLocaleLowerCase())) return;
             } else if (typeof condition === "boolean" && condition !== true) {
                 return
             } else {
