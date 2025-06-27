@@ -45,10 +45,10 @@ export const Github = async (
     const fn = actions[eventType] || NoMessage;
 
     const message = fn(body);
-    console.log(message)
-    if (!message || !message.repo || !colors[message.repo]) return undefined;
+    const repo = message?.repo?.toLowerCase()
+    if (!message || !repo || !colors[repo]) return undefined;
 
-    const color = colors[message.repo];
+    const color = colors[repo];
     const webhookMessage = message.message;
 
     webhookMessage.embeds?.forEach((embed) => {
@@ -58,7 +58,7 @@ export const Github = async (
         }
     });
     webhookMessage.username = `GitHub - ${
-        abbreviations[message.repo] || message.repo
+        abbreviations[repo] || repo
     }`;
 
     return {
