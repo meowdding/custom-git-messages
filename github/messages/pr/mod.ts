@@ -1,7 +1,7 @@
 import { Opened } from "./opened.ts";
 import { Closed } from "./closed.ts";
 import { Reopened } from "./reopened.ts";
-import { GitMessage, HandlerList, NoMessage } from "../../main.ts";
+import { GitMessage, HandlerList, NoMessage } from "../../../main.ts";
 
 const actions: HandlerList = {
     "opened": Opened,

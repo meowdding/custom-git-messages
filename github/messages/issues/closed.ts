@@ -1,4 +1,4 @@
-import { GitMessage } from "../../main.ts";
+import { GitMessage } from "../../../main.ts";
 
 const types: { [key: string]: string } = {
     "not_planned": " as Not Planned",

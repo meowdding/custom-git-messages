@@ -1,5 +1,5 @@
-import { GitMessage } from "../../../main.ts";
-import { truncate } from "../../../utils.ts";
+import { GitMessage } from "../../../../main.ts";
+import { truncate } from "../../../../github/utils.ts";
 
 const types: { [key: string]: string } = {
     "changes_requested": "Requested changes on",

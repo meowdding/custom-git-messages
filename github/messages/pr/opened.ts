@@ -1,5 +1,5 @@
-import { truncate } from "../../utils.ts";
-import { GitMessage } from "../../main.ts";
+import { truncate } from "../../../github/utils.ts";
+import { GitMessage } from "../../../main.ts";
 
 const orgs = ["meowdding", "skyblockapi"];
 

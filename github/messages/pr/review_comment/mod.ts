@@ -1,4 +1,4 @@
-import { GitMessage, HandlerList, NoMessage } from "../../../main.ts";
+import { GitMessage, HandlerList, NoMessage } from "../../../../main.ts";
 import { Created } from "./created.ts";
 
 const actions: HandlerList = {

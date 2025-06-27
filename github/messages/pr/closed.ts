@@ -1,5 +1,4 @@
-import { GitMessage } from "../../main.ts";
-import { postWebhook } from "../../webhooks.ts";
+import { GitMessage } from "../../../main.ts";
 
 //deno-lint-ignore no-explicit-any
 export const Closed = (body: any): GitMessage => {

@@ -1,4 +1,4 @@
-import { GitMessage } from "../main.ts";
+import { GitMessage } from "../../main.ts";
 
 //deno-lint-ignore no-explicit-any
 export const Star = (body: any): GitMessage => {

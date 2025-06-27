@@ -1,5 +1,5 @@
-import { GitMessage } from "../../../main.ts";
-import { truncate } from "../../../utils.ts";
+import { GitMessage } from "../../../../main.ts";
+import { truncate } from "../../../../github/utils.ts";
 
 //deno-lint-ignore no-explicit-any
 export const Created = (body: any): GitMessage => {
