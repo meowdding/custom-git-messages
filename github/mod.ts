@@ -45,6 +45,7 @@ export const Github = async (
     const fn = actions[eventType] || NoMessage;
 
     const message = fn(body);
+    console.log(message)
     if (!message || !message.repo || !colors[message.repo]) return undefined;
 
     const color = colors[message.repo];
