@@ -1,5 +1,5 @@
 import { truncate } from "../../../github/utils.ts";
-import { GitMessage } from "../../../main.ts";
+import { ServiceMessage } from "../../../main.ts";
 
 const orgs = ["meowdding", "skyblockapi"];
 
@@ -13,7 +13,7 @@ function getLabel(ref: any): string {
 }
 
 //deno-lint-ignore no-explicit-any
-export const Opened = (body: any): GitMessage => {
+export const Opened = (body: any): ServiceMessage => {
     const repoName = body.repository.name;
     const prNumber = body.pull_request.number;
     const prTitle = body.pull_request.title;

@@ -1,8 +1,8 @@
 import { truncate } from "../../../../github/utils.ts";
-import { GitMessage } from "../../../../main.ts";
+import { ServiceMessage } from "../../../../main.ts";
 
 //deno-lint-ignore no-explicit-any
-export const Created = (body: any): GitMessage => {
+export const Created = (body: any): ServiceMessage => {
     const repoName = body.repository.name;
     const message = body.comment.body;
     const issueNumber = body.issue.number;

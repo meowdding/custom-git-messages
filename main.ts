@@ -16,10 +16,10 @@ interface gitMessage {
     message: WebhookMessage;
     repo: string;
 }
-export type GitMessage = gitMessage | undefined;
+export type ServiceMessage = gitMessage | undefined;
 
 export type ServiceResponse = {
-    message: GitMessage,
+    message: ServiceMessage,
     name: string,
     isRedelivered: boolean 
 } 
@@ -28,7 +28,7 @@ export type ServiceResponse = {
 type ServiceList = { [route: string]: (body: any, request: any) => Promise<ServiceResponse> };
 
 // deno-lint-ignore no-explicit-any
-export type HandlerList = { [route: string]: (body: any) => GitMessage };
+export type HandlerList = { [route: string]: (body: any) => ServiceMessage };
 export const kv = await Deno.openKv();
 
 // TODO:x

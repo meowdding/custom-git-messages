@@ -1,7 +1,7 @@
-import { GitMessage } from "../../../main.ts";
+import { ServiceMessage } from "../../../main.ts";
 
 //deno-lint-ignore no-explicit-any
-export const Reopened = (body: any): GitMessage => {
+export const Reopened = (body: any): ServiceMessage => {
     const repoName = body.repository.name;
     const prNumber = body.pull_request.number;
     const prTitle = body.pull_request.title;

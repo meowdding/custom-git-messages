@@ -1,4 +1,4 @@
-import { GitMessage, HandlerList, kv, NoMessage, ServiceResponse } from "../main.ts";
+import { HandlerList, kv, NoMessage, ServiceResponse } from "../main.ts";
 import { Action } from "./messages/action.ts";
 import { Deployment } from "./messages/deployment.ts";
 import { IssueComment } from "./messages/issues/comments/mod.ts";

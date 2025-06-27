@@ -1,7 +1,7 @@
-import { GitMessage } from "../../main.ts";
+import { ServiceMessage } from "../../main.ts";
 
 //deno-lint-ignore no-explicit-any
-export const Action = (body: any): GitMessage => {
+export const Action = (body: any): ServiceMessage => {
     if (body.action !== "completed") {
         return;
     }

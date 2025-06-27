@@ -1,4 +1,4 @@
-import { GitMessage } from "../../../main.ts";
+import { ServiceMessage } from "../../../main.ts";
 
 const types: { [key: string]: string } = {
     "not_planned": " as Not Planned",
@@ -7,7 +7,7 @@ const types: { [key: string]: string } = {
 };
 
 //deno-lint-ignore no-explicit-any
-export const Closed = (body: any): GitMessage => {
+export const Closed = (body: any): ServiceMessage => {
     const repoName = body.repository.name;
     const issueNumber = body.issue.number;
     const issueTitle = body.issue.title;

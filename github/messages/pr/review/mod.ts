@@ -1,4 +1,4 @@
-import { GitMessage, HandlerList, NoMessage } from "../../../../main.ts";
+import { ServiceMessage, HandlerList, NoMessage } from "../../../../main.ts";
 import { Submitted } from "./submitted.ts";
 
 const actions: HandlerList = {
@@ -6,7 +6,7 @@ const actions: HandlerList = {
 };
 
 //deno-lint-ignore no-explicit-any
-export const PullRequestReview = (body: any): GitMessage => {
+export const PullRequestReview = (body: any): ServiceMessage => {
     const fn = actions[body.action] || NoMessage;
     return fn(body)
 };

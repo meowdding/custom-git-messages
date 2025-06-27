@@ -1,4 +1,4 @@
-import { GitMessage } from "../../main.ts";
+import { ServiceMessage } from "../../main.ts";
 
 //deno-lint-ignore no-explicit-any
 function buildDescription(commits: any[]): string {
@@ -20,7 +20,7 @@ function buildDescription(commits: any[]): string {
 }
 
 //deno-lint-ignore no-explicit-any
-export const Push = (body: any): GitMessage | undefined => {
+export const Push = (body: any): ServiceMessage | undefined => {
     const ref = body.ref;
 
     if (`refs/heads/${body.repository.default_branch}` !== ref) {
