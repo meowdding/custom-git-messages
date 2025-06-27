@@ -14,7 +14,7 @@ export const NoMessage = (body: any): undefined => {
 
 interface gitMessage {
     message: WebhookMessage;
-    repo: string;
+    repo: string | undefined;
 }
 export type ServiceMessage = gitMessage | undefined;
 
