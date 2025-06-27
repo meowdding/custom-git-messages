@@ -1,7 +1,7 @@
-import { ServiceMessage } from "../../main.ts";
+import { GithubMessage } from "../mod.ts";
 
 //deno-lint-ignore no-explicit-any
-export const Star = (body: any): ServiceMessage => {
+export const Star = (body: any): GithubMessage => {
     const action = body.action;
     const added = action === "created";
 

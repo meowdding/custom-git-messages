@@ -9,8 +9,10 @@ import { PullRequestReviewComment } from "./messages/pr/review_comment/mod.ts";
 import { Push } from "./messages/push.ts";
 import { Star } from "./messages/stars.ts";
 import { Fork } from "./messages/fork.ts";
+import { abbreviations, colors } from "./projects.ts";
+import { WebhookMessage } from "https://deno.land/x/dishooks@v1.1.0/types.ts";
 
-const actions: HandlerList = {
+const actions: HandlerList<GithubMessage | undefined> = {
     "fork": Fork,
     "push": Push,
     "star": Star,
@@ -23,8 +25,17 @@ const actions: HandlerList = {
     "workflow_run": Action,
 };
 
-//deno-lint-ignore no-explicit-any
-export const Github = async (body: any, request: any): Promise<ServiceResponse> => {
+export type GithubMessage = {
+    message: WebhookMessage;
+    repo: string;
+};
+
+export const Github = async (
+    //deno-lint-ignore no-explicit-any
+    body: any,
+    //deno-lint-ignore no-explicit-any
+    request: any,
+): Promise<ServiceResponse> => {
     const eventType = request.headers.get("X-GitHub-Event") || "";
     const eventId = request.headers.get("X-GitHub-Delivery") || "";
 
@@ -32,9 +43,22 @@ export const Github = async (body: any, request: any): Promise<ServiceResponse> 
     const isRedelivered = (await respond).value != null;
     kv.set(["ids", eventId], "meow", { expireIn: 3 * 24 * 60 * 60 * 1000 });
     const fn = actions[eventType] || NoMessage;
+
+    const message = fn(body);
+    if (!message || !message.repo || !colors[message.repo]) return undefined;
+
+    const color = colors[message.repo];
+    const webhookMessage = message.message;
+
+    webhookMessage.embeds?.forEach((embed) => {
+        embed.color = color;
+    });
+    webhookMessage.username = `GitHub - ${
+        abbreviations[message.repo] || message.repo
+    }`;
+
     return {
-        message: fn(body),
-        name: "GitHub",
-        isRedelivered: isRedelivered
-    }
+        message: webhookMessage,
+        isRedelivered: isRedelivered,
+    };
 };

@@ -1,5 +1,5 @@
-import { ServiceMessage } from "../../../../main.ts";
 import { truncate } from "../../../../github/utils.ts";
+import { GithubMessage } from "../../../mod.ts";
 
 const types: { [key: string]: string } = {
     "changes_requested": "Requested changes on",
@@ -7,7 +7,7 @@ const types: { [key: string]: string } = {
 };
 
 //deno-lint-ignore no-explicit-any
-export const Submitted = (body: any): ServiceMessage => {
+export const Submitted = (body: any): GithubMessage | undefined => {
     const repoName = body.repository.name;
     const prNumber = body.pull_request.number;
     const prTitle = body.pull_request.title;

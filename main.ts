@@ -12,23 +12,20 @@ export const NoMessage = (body: any): undefined => {
     return;
 };
 
-interface gitMessage {
-    message: WebhookMessage;
-    repo: string | undefined;
-}
-export type ServiceMessage = gitMessage | undefined;
+export type ServiceMessage = WebhookMessage | undefined;
 
 export type ServiceResponse = {
-    message: ServiceMessage,
-    name: string,
-    isRedelivered: boolean 
-} 
+    message: WebhookMessage;
+    isRedelivered: boolean;
+} | undefined;
+
+type ServiceList = {
+    // deno-lint-ignore no-explicit-any
+    [route: string]: (body: any, request: any) => Promise<ServiceResponse>;
+};
 
 // deno-lint-ignore no-explicit-any
-type ServiceList = { [route: string]: (body: any, request: any) => Promise<ServiceResponse> };
-
-// deno-lint-ignore no-explicit-any
-export type HandlerList = { [route: string]: (body: any) => ServiceMessage };
+export type HandlerList<T> = { [route: string]: (body: any) => T };
 export const kv = await Deno.openKv();
 
 // TODO:x
@@ -40,17 +37,18 @@ serve(async (request) => {
     } else if (request.method != "POST") {
         return new Response("{}", { status: 405 });
     }
-    console.log(request)
+    console.log(request);
 
     const body = await request.json();
 
-    const service = URL.parse(request.url)?.pathname.substring(1).split("/")[0] || ""
+    const service =
+        URL.parse(request.url)?.pathname.substring(1).split("/")[0] || "";
 
     const fun = handlers[service] || NoMessage;
-    const response = await fun(body, request);
+    const serviceMessage = await fun(body, request);
 
-    if (response.message) {
-        postWebhook(response.message.message, response.name, response.message.repo, response.isRedelivered);
+    if (serviceMessage) {
+        postWebhook(serviceMessage.message, serviceMessage.isRedelivered);
     }
 
     return new Response("{}", { status: 200 });

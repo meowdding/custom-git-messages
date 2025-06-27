@@ -1,16 +1,17 @@
 import { Opened } from "./opened.ts";
 import { Closed } from "./closed.ts";
 import { Reopened } from "./reopened.ts";
-import { ServiceMessage, HandlerList, NoMessage } from "../../../main.ts";
+import { HandlerList, NoMessage } from "../../../main.ts";
+import { GithubMessage } from "../../mod.ts";
 
-const actions: HandlerList = {
+const actions: HandlerList<GithubMessage | undefined> = {
     "opened": Opened,
     "closed": Closed,
     "reopened": Reopened
 };
 
 //deno-lint-ignore no-explicit-any
-export const PullRequest = (body: any): ServiceMessage => {
+export const PullRequest = (body: any): GithubMessage | undefined => {
     const fn = actions[body.action] || NoMessage;
     return fn(body)
 };

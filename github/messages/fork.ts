@@ -1,7 +1,7 @@
-import { ServiceMessage } from "../../main.ts";
+import { GithubMessage } from "../mod.ts";
 
 //deno-lint-ignore no-explicit-any
-export const Fork = (body: any): ServiceMessage => {
+export const Fork = (body: any): GithubMessage => {
     const forkee = body.forkee;
 
     const repoName = body.repository.name;
