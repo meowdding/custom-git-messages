@@ -34,6 +34,7 @@ export const Github = async (body: any, request: any): Promise<ServiceResponse> 
     const fn = actions[eventType] || NoMessage;
     return {
         message: fn(body),
+        name: "GitHub",
         isRedelivered: isRedelivered
     }
 };
