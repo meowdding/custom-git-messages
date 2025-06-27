@@ -20,6 +20,7 @@ export type GitMessage = gitMessage | undefined;
 
 export type ServiceResponse = {
     message: GitMessage,
+    name: string,
     isRedelivered: boolean 
 } 
 
@@ -34,7 +35,7 @@ export const kv = await Deno.openKv();
 // - build failure on master
 // - changes +/- on commit
 serve(async (request) => {
-    if (!request.url.endsWith(Deno.env.get("secret") || "meow")) {
+    if (!request.url.endsWith("/" + Deno.env.get("secret") || "meow")) {
         return new Response("{}", { status: 401 });
     } else if (request.method != "POST") {
         return new Response("{}", { status: 405 });
@@ -43,11 +44,13 @@ serve(async (request) => {
 
     const body = await request.json();
 
-    const fun = handlers["github"] || NoMessage;
+    const service = URL.parse(request.url)?.pathname.substring(1).split("/")[0] || ""
+
+    const fun = handlers[service] || NoMessage;
     const response = await fun(body, request);
 
     if (response.message) {
-        postWebhook(response.message.message, response.message.repo, response.isRedelivered);
+        postWebhook(response.message.message, response.name, response.message.repo, response.isRedelivered);
     }
 
     return new Response("{}", { status: 200 });

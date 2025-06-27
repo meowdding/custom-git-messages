@@ -9,6 +9,7 @@ const prodUrl = Deno.env.get("webhook_url")
 
 export function postWebhook(
     message: WebhookMessage,
+    name: string,
     project: string,
     isRedelivered: boolean,
 ) {
@@ -26,7 +27,7 @@ export function postWebhook(
             text: `Repo: ${actualProject}`,
         };
     });
-    message.username = `GitHub - ${abbreviations[actualProject]}`;
+    message.username = `${name} - ${abbreviations[actualProject]}`;
     if (isRedelivered || !prodUrl) {
         post(debugUrl, message, true);
     } else {
