@@ -37,7 +37,6 @@ serve(async (request) => {
     } else if (request.method != "POST") {
         return new Response("{}", { status: 405 });
     }
-    console.log(request);
 
     const body = await request.json();
 
