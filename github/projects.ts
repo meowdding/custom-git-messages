@@ -19,7 +19,7 @@ export const colors: { [project: string]: number } = {
     "rewardclaim": 1,
     "repo": 1,
     "repo-lib": 1,
-    "misc-utils": 1,
+    "meowdding-dev-utils": 1,
 }
 
 export const abbreviations: { [project: string]: string }  = {
@@ -43,7 +43,7 @@ export const abbreviations: { [project: string]: string }  = {
     "rewardclaim": "rc",
     "repo": "sbapi-repo",
     "repo-lib": "repo-lib",
-    "misc-utils": "misc-utils",
+    "meowdding-dev-utils": "dev-utils",
 }
 
 export function createAll() {
