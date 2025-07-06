@@ -17,6 +17,8 @@ export const colors: { [project: string]: number } = {
     "website": 1,
     "remote-configs": 1,
     "rewardclaim": 1,
+    "repo": 1,
+    "repo-lib": 1,
 }
 
 export const abbreviations: { [project: string]: string }  = {
@@ -38,6 +40,8 @@ export const abbreviations: { [project: string]: string }  = {
     "website": "website",
     "remote-configs": "remote-configs",
     "rewardclaim": "rc",
+    "repo": "sbapi-repo",
+    "repo-lib": "repo-lib",
 }
 
 export function createAll() {
