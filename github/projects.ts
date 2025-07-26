@@ -20,6 +20,7 @@ export const colors: { [project: string]: number } = {
     "repo": 1,
     "repo-lib": 1,
     "meowdding-dev-utils": 1,
+    "item-data-fixer": 1,
 }
 
 export const abbreviations: { [project: string]: string }  = {
@@ -44,6 +45,7 @@ export const abbreviations: { [project: string]: string }  = {
     "repo": "sbapi-repo",
     "repo-lib": "repo-lib",
     "meowdding-dev-utils": "dev-utils",
+    "item-data-fixer": "dfu",
 }
 
 export function createAll() {
