@@ -19,6 +19,7 @@ export const Star = (body: any): GithubMessage => {
                     description: `The repository now has ${starAmount} Star${
                         starAmount == 1 ? "" : "s"
                     }! :star:`,
+                    url: body.repository.html_url,
                     author: {
                         name: user,
                         icon_url: body.sender.avatar_url,
