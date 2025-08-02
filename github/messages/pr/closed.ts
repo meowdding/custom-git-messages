@@ -1,3 +1,4 @@
+import { kv } from "../../../main.ts";
 import { GithubMessage } from "../../mod.ts";
 
 //deno-lint-ignore no-explicit-any
@@ -10,6 +11,7 @@ export const Closed = (body: any): GithubMessage => {
     const wasMerged = body.pull_request.merged || false;
 
     if (wasMerged) {
+        kv.set([repoName, "merged", body.pull_request.merge_commit_sha], true, { expireIn: 60 * 1000 })
         return {
             message: {
                 embeds: [

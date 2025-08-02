@@ -1,3 +1,4 @@
+import { kv } from "../../main.ts";
 import { GithubMessage } from "../mod.ts";
 
 //deno-lint-ignore no-explicit-any
@@ -20,7 +21,7 @@ function buildDescription(commits: any[]): string {
 }
 
 //deno-lint-ignore no-explicit-any
-export const Push = (body: any): GithubMessage | undefined => {
+export const Push = async (body: any): Promise<GithubMessage | undefined> => {
     const ref = body.ref;
 
     if (`refs/heads/${body.repository.default_branch}` !== ref) {
@@ -31,12 +32,9 @@ export const Push = (body: any): GithubMessage | undefined => {
     const repoName = body.repository.name;
     const url = body.compare;
 
-    if (
-        committer === "GitHub" &&
-        body.head_commit.committer.email === "noreply@github.com"
-    ) {
-        return;
-    }
+    const response = await kv.get([repoName, "merged", body.after])
+    const isMerge = response.value != null
+    if (isMerge) return
 
     body.commits.forEach((x: { message: string | string[]; }) => {
         if (x.message.includes("[nolog]")) {

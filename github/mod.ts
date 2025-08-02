@@ -12,7 +12,7 @@ import { Fork } from "./messages/fork.ts";
 import { abbreviations, colors } from "./projects.ts";
 import { WebhookMessage } from "https://deno.land/x/dishooks@v1.1.0/types.ts";
 
-const actions: HandlerList<GithubMessage | undefined> = {
+const actions: HandlerList<Promise<GithubMessage | undefined> | (GithubMessage | undefined)> = {
     "fork": Fork,
     "push": Push,
     "star": Star,
@@ -44,7 +44,7 @@ export const Github = async (
     kv.set(["ids", eventId], "meow", { expireIn: 3 * 24 * 60 * 60 * 1000 });
     const fn = actions[eventType] || NoMessage;
 
-    const message = fn(body);
+    const message = await fn(body);
     const repo = message?.repo?.toLowerCase()
     if (!message || !repo || !colors[repo]) return undefined;
 
