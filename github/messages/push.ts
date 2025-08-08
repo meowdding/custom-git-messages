@@ -28,7 +28,13 @@ export const Push = async (body: any): Promise<GithubMessage | undefined> => {
         return;
     }
 
-    const committer = body.head_commit.committer.name;
+    const actualComitter = body.head_commit.committer.name;
+    let committer;
+    if (actualComitter === "GitHub" && body.head_commit.committer.email === "noreply@github.com") {
+        committer = body.head_commit.author.name;
+    } else {
+        committer = body.head_commit.committer.name
+    }
     const repoName = body.repository.name;
     const url = body.compare;
 
