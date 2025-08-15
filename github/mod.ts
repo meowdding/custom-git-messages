@@ -11,11 +11,13 @@ import { Star } from "./messages/stars.ts";
 import { Fork } from "./messages/fork.ts";
 import { abbreviations, colors } from "./projects.ts";
 import { WebhookMessage } from "https://deno.land/x/dishooks@v1.1.0/types.ts";
+import { Create } from "./messages/create.ts";
 
 const actions: HandlerList<Promise<GithubMessage | undefined> | (GithubMessage | undefined)> = {
     "fork": Fork,
     "push": Push,
     "star": Star,
+    "create": Create,
     "issues": Issue,
     "issue_comment": IssueComment,
     "pull_request": PullRequest,
