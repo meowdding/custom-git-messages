@@ -22,6 +22,7 @@ export const colors: { [project: string]: number } = {
     "meowdding-dev-utils": 1,
     "item-data-fixer": 1,
     "meowdding-gradle": 1,
+    "sillygames": 1
 }
 
 export const abbreviations: { [project: string]: string }  = {
@@ -48,6 +49,7 @@ export const abbreviations: { [project: string]: string }  = {
     "meowdding-dev-utils": "dev-utils",
     "item-data-fixer": "dfu",
     "meowdding-gradle": "meowdding-gradle",
+    "sillygames": "games"
 }
 
 export function createAll() {
