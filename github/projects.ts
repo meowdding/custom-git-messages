@@ -25,7 +25,7 @@ export const colors: { [project: string]: number } = {
     "sillygames": 1,
     "cosmetics-backend": 1,
     "catharsis": 0xD21F64,
-    "mortem": 0x2B2B2B
+    "mortem": 0xf08080
 }
 
 export const abbreviations: { [project: string]: string }  = {
