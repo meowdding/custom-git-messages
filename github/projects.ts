@@ -27,6 +27,7 @@ export const colors: { [project: string]: number } = {
     "catharsis": 0xD21F64,
     "mortem": 0xf08080,
     "auto-mixins": 1,
+    "skybridge": 0xef161e
 }
 
 export const abbreviations: { [project: string]: string }  = {
@@ -57,7 +58,8 @@ export const abbreviations: { [project: string]: string }  = {
     "cosmetics-backend": "cosmetics-backend",
     "catharsis": "catharsis",
     "mortem": "mortem",
-    "auto-mixins": "auto-mixins"
+    "auto-mixins": "auto-mixins",
+    "skybridge": "bridge"
 }
 
 export function createAll() {
