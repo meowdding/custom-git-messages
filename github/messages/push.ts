@@ -20,11 +20,16 @@ function buildDescription(commits: any[]): string {
     return message;
 }
 
+const allowedBranches = ["dev", "development"];
+
 //deno-lint-ignore no-explicit-any
 export const Push = async (body: any): Promise<GithubMessage | undefined> => {
     const ref = body.ref;
 
-    if (`refs/heads/${body.repository.default_branch}` !== ref) {
+    const defaultBranchRef = `refs/heads/${body.repository.default_branch}`;
+    const isAllowedBranch = allowedBranches.some(branch => ref === `refs/heads/${branch}`);
+    
+    if (ref !== defaultBranchRef && !isAllowedBranch) {
         return;
     }
 
