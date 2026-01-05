@@ -29,6 +29,7 @@ export const colors: { [project: string]: number } = {
     "auto-mixins": 1,
     "skybridge": 0xef161e,
     "cats-file-format": 1,
+    "catsquash": 1,
 }
 
 export const abbreviations: { [project: string]: string }  = {
@@ -62,6 +63,7 @@ export const abbreviations: { [project: string]: string }  = {
     "auto-mixins": "auto-mixins",
     "skybridge": "bridge",
     "cats-file-format": "cats-file-format",
+    "catsquash": "catsquash",
 }
 
 export function createAll() {
