@@ -30,6 +30,7 @@ export const colors: { [project: string]: number } = {
     "skybridge": 0xef161e,
     "cats-file-format": 1,
     "catsquash": 1,
+    "catharsis-editor": 0x851541
 }
 
 export const abbreviations: { [project: string]: string }  = {
