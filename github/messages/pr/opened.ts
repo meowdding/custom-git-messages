@@ -60,7 +60,7 @@ export const Opened = (body: any): GithubMessage => {
                     fields: [
                         {
                             name: "Changes",
-                            value: `+${additions}/-${deletions}`,
+                            value: `+${additions.toLocaleString('en-US',{minimumFractionDigits:2})}/-${deletions.toLocaleString('en-US',{minimumFractionDigits:2})}`,
                             inline: true,
                         },
                     ],
