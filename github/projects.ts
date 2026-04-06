@@ -32,7 +32,8 @@ export const colors: { [project: string]: number } = {
     "catsquash": 1,
     "catharsis-editor": 0x851541,
     "cats-file-format": 1,
-    "craftlight": 0xfcfd97
+    "craftlight": 0xfcfd97,
+    "resourcepacks": 0x55ff55
 }
 
 export const abbreviations: { [project: string]: string }  = {
