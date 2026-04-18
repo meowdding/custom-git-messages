@@ -95,5 +95,6 @@ export const projects: {
   tooltipthingy: {
     color: 0xc6a0f6,
     abbreviations: "ttt",
+    allow_builds: ["master"],
   },
 };

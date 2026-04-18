@@ -11,7 +11,6 @@ export const Workflow = async (
 
   const repoName = body.repository.name;
   const headBranch = body.workflow_run.head_branch;
-  const defaultBranch = body.repository.default_branch;
 
   const isAllowedBranch =
     projects[repoName.toLowerCase()].allow_builds?.includes(headBranch);
