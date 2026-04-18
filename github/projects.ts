@@ -1,85 +1,99 @@
-export const colors: { [project: string]: number } = {
-    "custom-git-messages": 1,
-    "skyblock-pv": 0xF6B8D0,
-    "skyblock-pv-backend": 0xFC5203,
-    "skycubed": 0xD1FEb8,
-    "customscoreboard": 0xF1BEB5,
-    "skyocean": 0xA4D8D8,
-    "skyblock-rpc": 0xF8C57C,
-    "skyblockapi": 0xFFFFFF,
-    "meowdding-lib": 0x957DAD,
-    "ktmodules": 1,
-    "meowdding-repo": 1,
-    "ktcodecs": 1,
-    "sky-block": 0xf9a7ff,
-    "bot": 1,
-    "meowdding-patches": 1,
-    "website": 1,
-    "remote-configs": 1,
-    "rewardclaim": 1,
-    "repo": 1,
-    "repo-lib": 1,
-    "meowdding-dev-utils": 1,
-    "item-data-fixer": 1,
-    "meowdding-gradle": 1,
-    "sillygames": 1,
-    "cosmetics-backend": 1,
-    "catharsis": 0xD21F64,
-    "mortem": 0xf08080,
-    "auto-mixins": 1,
-    "skybridge": 0xef161e,
-    "cats-file-format": 1,
-    "catsquash": 1,
-    "catharsis-editor": 0x851541,
-    "craftlight": 0xfcfd97,
-    "resourcepacks": 0x55ff55,
-    "tooltipthingy": 0xc6a0f6
-}
-
-export const abbreviations: { [project: string]: string }  = {
-    "custom-git-messages": "cm",
-    "skyblock-pv": "pv",
-    "skyblock-pv-backend": "pv-backend",
-    "skycubed": "sc",
-    "customscoreboard": "cs",
-    "skyocean": "so",
-    "skyblock-rpc": "rpc",
-    "skyblockapi": "api",
-    "meowdding-lib": "mlib",
-    "ktmodules": "ktmodules",
-    "meowdding-repo": "repo",
-    "ktcodecs": "ktcodecs",
-    "sky-block": "skyblock",
-    "bot": "bot",
-    "meowdding-patches": "patches",
-    "website": "website",
-    "remote-configs": "remote-configs",
-    "rewardclaim": "rc",
-    "repo": "sbapi-repo",
-    "repo-lib": "repo-lib",
-    "meowdding-dev-utils": "dev-utils",
-    "item-data-fixer": "dfu",
-    "meowdding-gradle": "meowdding-gradle",
-    "sillygames": "games",
-    "cosmetics-backend": "cosmetics-backend",
-    "catharsis": "catharsis",
-    "mortem": "mortem",
-    "auto-mixins": "auto-mixins",
-    "skybridge": "bridge",
-    "cats-file-format": "cats-file-format",
-    "catsquash": "catsquash",
-    "craftlight": "craftlight",
-    "tooltipthingy": "tooltipthingy"
-}
-
-export function createAll() {
-    //test("custom-git-messages")
-    //test("skyblock-pv")
-    //test("skycubed")
-    //test("customscoreboard")
-    //test("skyocean")
-    //test("skyblock-rpc")
-    //test("skyblockapi")
-}
-
-// todo change colors
+export const projects: {
+  [project: string]: {
+    color?: number;
+    abbreviations?: string;
+    allow_builds?: [string];
+  };
+} = {
+  "custom-git-messages": {
+    color: 1,
+    abbreviations: "cm",
+  },
+  "skyblock-pv": {
+    color: 0xf6b8d0,
+    abbreviations: "pv",
+  },
+  "skyblock-pv-backend": {
+    color: 0xfc5203,
+    abbreviations: "pv-backend",
+  },
+  skycubed: {
+    color: 0xd1feb8,
+    abbreviations: "sc",
+  },
+  customscoreboard: {
+    color: 0xf1beb5,
+    abbreviations: "cs",
+  },
+  skyocean: {
+    color: 0xa4d8d8,
+    abbreviations: "so",
+  },
+  "skyblock-rpc": {
+    color: 0xf8c57c,
+    abbreviations: "rpc",
+  },
+  skyblockapi: {
+    color: 0xffffff,
+    abbreviations: "api",
+  },
+  "meowdding-lib": {
+    color: 0x957dad,
+    abbreviations: "mlib",
+  },
+  ktmodules: {},
+  "meowdding-repo": {
+    abbreviations: "repo",
+  },
+  ktcodecs: {},
+  "sky-block": {
+    color: 0xf9a7ff,
+  },
+  bot: {},
+  "meowdding-patches": {
+    abbreviations: "patches",
+  },
+  website: {},
+  "remote-configs": {},
+  rewardclaim: {
+    abbreviations: "rc",
+  },
+  repo: {
+    abbreviations: "sbapi-repo",
+  },
+  "repo-lib": {},
+  "meowdding-dev-utils": {
+    abbreviations: "dev-utils",
+  },
+  "item-data-fixer": {
+    abbreviations: "dfu",
+  },
+  "meowdding-gradle": {},
+  sillygames: {
+    abbreviations: "games",
+  },
+  "cosmetics-backend": {},
+  catharsis: {
+    color: 0xd21f64,
+  },
+  mortem: {
+    color: 0xf08080,
+  },
+  "auto-mixins": {},
+  skybridge: {
+    color: 0xef161e,
+    abbreviations: "bridge",
+  },
+  "cats-file-format": {},
+  catsquash: {},
+  craftlight: {
+    color: 0xfcfd97,
+  },
+  resourcepacks: {
+    color: 0x55ff55,
+  },
+  tooltipthingy: {
+    color: 0xc6a0f6,
+    abbreviations: "ttt",
+  },
+};

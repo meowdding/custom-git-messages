@@ -9,62 +9,73 @@ import { PullRequestReviewComment } from "./messages/pr/review_comment/mod.ts";
 import { Push } from "./messages/push.ts";
 import { Star } from "./messages/stars.ts";
 import { Fork } from "./messages/fork.ts";
-import { abbreviations, colors } from "./projects.ts";
+import { projects } from "./projects.ts";
 import { WebhookMessage } from "https://deno.land/x/dishooks@v1.1.0/types.ts";
 import { Create } from "./messages/create.ts";
+import { Workflow } from "./messages/workflow.ts";
 
-const actions: HandlerList<Promise<GithubMessage | undefined> | (GithubMessage | undefined)> = {
-    "fork": Fork,
-    "push": Push,
-    "star": Star,
-    "create": Create,
-    "issues": Issue,
-    "issue_comment": IssueComment,
-    "pull_request": PullRequest,
-    "pull_request_review": PullRequestReview,
-    "pull_request_review_comment": PullRequestReviewComment,
-    "deployment_status": Deployment,
-    "workflow_run": Action,
+const actions: HandlerList<
+  Promise<GithubMessage | undefined> | (GithubMessage | undefined)
+> = {
+  fork: Fork,
+  push: Push,
+  star: Star,
+  create: Create,
+  issues: Issue,
+  issue_comment: IssueComment,
+  pull_request: PullRequest,
+  pull_request_review: PullRequestReview,
+  pull_request_review_comment: PullRequestReviewComment,
+  deployment_status: Deployment,
+  workflow_run: [Action, Workflow],
 };
 
 export type GithubMessage = {
-    message: WebhookMessage;
-    repo: string;
+  message: WebhookMessage;
+  repo: string;
+  type?: "log" | "download";
 };
 
 export const Github = async (
-    //deno-lint-ignore no-explicit-any
-    body: any,
-    //deno-lint-ignore no-explicit-any
-    request: any,
-): Promise<ServiceResponse> => {
-    const eventType = request.headers.get("X-GitHub-Event") || "";
-    const eventId = request.headers.get("X-GitHub-Delivery") || "";
+  //deno-lint-ignore no-explicit-any
+  body: any,
+  //deno-lint-ignore no-explicit-any
+  request: any,
+): Promise<ServiceResponse[] | undefined> => {
+  const eventType = request.headers.get("X-GitHub-Event") || "";
+  const eventId = request.headers.get("X-GitHub-Delivery") || "";
 
-    const respond = kv.get(["ids", eventId]);
-    const isRedelivered = (await respond).value != null;
-    kv.set(["ids", eventId], "meow", { expireIn: 3 * 24 * 60 * 60 * 1000 });
-    const fn = actions[eventType] || NoMessage;
+  const respond = kv.get(["ids", eventId]);
+  const isRedelivered = (await respond).value != null;
+  kv.set(["ids", eventId], "meow", { expireIn: 3 * 24 * 60 * 60 * 1000 });
+  const fn = actions[eventType] || NoMessage;
 
+  let functions = Array.isArray(fn) ? fn : [fn];
+
+  let messages: ServiceResponse[] = [];
+
+  functions.forEach(async (fn) => {
     const message = await fn(body);
-    const repo = message?.repo?.toLowerCase()
-    if (!message || !repo || !colors[repo]) return undefined;
+    const repo = message?.repo?.toLowerCase();
+    if (!message || !repo || !projects[repo]) return;
 
-    const color = colors[repo];
+    const color = projects[repo] || 0;
     const webhookMessage = message.message;
 
     webhookMessage.embeds?.forEach((embed) => {
-        embed.color = color;
-        embed.footer = {
-            text: `Repo: ${message.repo}`
-        }
+      embed.color = color;
+      embed.footer = {
+        text: `Repo: ${message.repo}`,
+      };
     });
-    webhookMessage.username = `GitHub - ${
-        abbreviations[repo] || repo
-    }`;
+    webhookMessage.username = `GitHub - ${projects[repo].abbreviations || repo}`;
 
-    return {
-        message: webhookMessage,
-        isRedelivered: isRedelivered,
-    };
+    messages.push({
+      message: webhookMessage,
+      isRedelivered: isRedelivered,
+      isDownload: message.type === "download",
+    });
+  });
+
+  return messages;
 };
