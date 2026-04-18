@@ -1,4 +1,3 @@
-import { serve } from "https://deno.land/std@0.184.0/http/server.ts";
 import { WebhookMessage } from "https://deno.land/x/dishooks@v1.1.0/types.ts";
 import { postWebhook } from "./webhooks.ts";
 import { Github } from "./github/mod.ts";
@@ -31,7 +30,7 @@ export const kv = await Deno.openKv();
 // TODO:x
 // - build failure on master
 // - changes +/- on commit
-serve(async (request) => {
+Deno.serve(async (request) => {
     if (!request.url.endsWith("/" + Deno.env.get("secret") || "meow")) {
         return new Response("{}", { status: 401 });
     } else if (request.method != "POST") {
