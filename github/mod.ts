@@ -63,7 +63,7 @@ export const Github = async (
     console.log(`${message}`);
     if (!message || !repo || !projects[repo]) return;
 
-    const color = projects[repo] || 0;
+    const color = projects[repo].color || 0;
     const webhookMessage = message.message;
 
     webhookMessage.embeds?.forEach((embed) => {
