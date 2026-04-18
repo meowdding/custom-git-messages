@@ -61,11 +61,15 @@ Deno.serve(
       ? serviceMessages
       : [serviceMessages];
     console.log(messages);
-    messages.forEach((message) => {
+    for (let message of messages) {
       console.log("posting ", message);
-      if (!message) return;
-      postWebhook(message.message, message.isRedelivered, message.isDownload);
-    });
+      if (!message) continue;
+      await postWebhook(
+        message.message,
+        message.isRedelivered,
+        message.isDownload,
+      );
+    }
 
     return new Response("{}", { status: 200 });
   },

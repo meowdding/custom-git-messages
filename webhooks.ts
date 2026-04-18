@@ -7,7 +7,7 @@ const debugUrl = Deno.env.get("debug_webhook_url"); // used for redelivered even
 const prodUrl = Deno.env.get("webhook_url");
 const downloadUrl = Deno.env.get("download_webhook_url");
 
-export function postWebhook(
+export async function postWebhook(
   message: WebhookMessage,
   isRedelivered: boolean,
   isDownload: boolean,
@@ -21,5 +21,6 @@ export function postWebhook(
   } else {
     url = prodUrl;
   }
-  post(url, message, true);
+  console.log("posting to ", url);
+  await post(url || debugUrl, message, true);
 }
