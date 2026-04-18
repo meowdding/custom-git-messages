@@ -54,7 +54,9 @@ Deno.serve(
     const fun = handlers[service] || NoMessage;
 
     const serviceMessages = await fun(body, request);
-    if (!serviceMessages) return;
+    console.log(serviceMessages);
+    if (!serviceMessages)
+      return new Response(`{"_":"no_message"}`, { status: 200 });
     let messages = Array.isArray(serviceMessages)
       ? serviceMessages
       : [serviceMessages];
