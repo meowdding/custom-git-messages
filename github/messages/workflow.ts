@@ -6,6 +6,7 @@ export const Workflow = async (
   body: any,
 ): Promise<GithubMessage | undefined> => {
   if (body.action !== "completed") {
+    console.log("workflow_run/downloads: Not complete");
     return;
   }
 
@@ -13,13 +14,20 @@ export const Workflow = async (
   const headBranch = body.workflow_run.head_branch;
 
   const isAllowedBranch =
-    projects[repoName.toLowerCase()].allow_builds?.includes(headBranch);
+    projects[repoName.toLowerCase()]?.allow_builds?.includes(headBranch);
 
-  if (!isAllowedBranch) {
+  if (isAllowedBranch === undefined || !isAllowedBranch) {
+    console.log(
+      "workflow_run/downloads:",
+      headBranch,
+      "not in",
+      projects[repoName.toLowerCase()]?.allow_builds,
+    );
     return;
   }
 
-  if (body.workflow_run.conclusion !== "failure") {
+  if (body.workflow_run.conclusion !== "success") {
+    console.log("workflow_run/downloads: No success");
     return;
   }
 
@@ -27,20 +35,33 @@ export const Workflow = async (
     (x) => x.json(),
   );
 
+  console.log("workflow_run/downloads: Fetched artifacts", artifactsResponse);
+
   let artifacts: {
     name: string;
     id: string;
   }[] = [];
 
   (artifactsResponse?.artifacts || []).forEach((artifact) => {
-    if (!artifact.name.endsWith(".jar")) return;
+    if (!artifact.name.endsWith(".jar")) {
+      console.log(
+        "workflow_run/downloads: Skipping",
+        artifact.name,
+        ", no jar!",
+      );
+      return;
+    }
+    console.log("workflow_run/downloads: Adding", artifact.name);
     artifacts.push({
       name: artifact.name,
       id: artifact.id,
     });
   });
 
-  if (artifacts.length === 0) return;
+  if (artifacts.length === 0) {
+    console.log("workflow_run/downloads: Cancelling message, no artifacts!");
+    return;
+  }
 
   let description = "";
 

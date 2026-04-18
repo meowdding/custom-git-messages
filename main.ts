@@ -54,13 +54,13 @@ Deno.serve(
     const fun = handlers[service] || NoMessage;
 
     const serviceMessages = await fun(body, request);
-    console.log(serviceMessages);
+    console.log("Service Messages:", serviceMessages);
     if (!serviceMessages)
       return new Response(`{"_":"no_message"}`, { status: 200 });
     let messages = Array.isArray(serviceMessages)
       ? serviceMessages
       : [serviceMessages];
-    console.log(messages);
+    console.log("Messages:", messages);
     for (let message of messages) {
       console.log("posting ", message);
       if (!message) continue;

@@ -49,18 +49,15 @@ export const Github = async (
   const isRedelivered = (await respond).value != null;
   kv.set(["ids", eventId], "meow", { expireIn: 3 * 24 * 60 * 60 * 1000 });
   const fn = actions[eventType] || NoMessage;
-  console.log(eventType);
 
   let functions = Array.isArray(fn) ? fn : [fn];
 
   let messages: ServiceResponse[] = [];
 
-  console.log(functions);
+  console.log("github: eventType =", eventType, ", functions =", functions);
   for (const fn of functions) {
     const message = await fn(body);
     const repo = message?.repo?.toLowerCase();
-    console.log(`${repo} -> ${repo ? projects[repo] : "undefined"}`);
-    console.log(`${message}`);
     if (!message || !repo || !projects[repo]) return;
 
     const color = projects[repo].color || 0;
