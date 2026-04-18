@@ -60,6 +60,7 @@ Deno.serve(
       : [serviceMessages];
     console.log(messages);
     messages.forEach((message) => {
+      console.log("posting ", message);
       if (!message) return;
       postWebhook(message.message, message.isRedelivered, message.isDownload);
     });

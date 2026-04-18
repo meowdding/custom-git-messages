@@ -12,8 +12,14 @@ export function postWebhook(
   isRedelivered: boolean,
   isDownload: boolean,
 ) {
-  let url = isRedelivered
-    ? debugUrl
-    : (isDownload ? downloadUrl : prodUrl) || debugUrl;
+  let url;
+
+  if (isRedelivered) {
+    url = debugUrl;
+  } else if (isDownload) {
+    url = downloadUrl;
+  } else {
+    url = prodUrl;
+  }
   post(url, message, true);
 }
