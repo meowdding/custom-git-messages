@@ -54,9 +54,12 @@ export const Github = async (
 
   let messages: ServiceResponse[] = [];
 
+  console.log(functions);
   functions.forEach(async (fn) => {
     const message = await fn(body);
     const repo = message?.repo?.toLowerCase();
+    console.log(`${repo} -> ${repo ? projects[repo] : "undefined"}`);
+    console.log(`${message}`);
     if (!message || !repo || !projects[repo]) return;
 
     const color = projects[repo] || 0;
