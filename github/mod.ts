@@ -58,7 +58,9 @@ export const Github = async (
   for (const fn of functions) {
     const message = await fn(body);
     const repo = message?.repo?.toLowerCase();
-    if (!message || !repo || !projects[repo]) return;
+    if (!message || !repo || !projects[repo]) {
+      continue;
+    }
 
     const color = projects[repo].color || 0;
     const webhookMessage = message.message;
