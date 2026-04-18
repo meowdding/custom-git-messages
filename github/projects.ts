@@ -31,9 +31,9 @@ export const colors: { [project: string]: number } = {
     "cats-file-format": 1,
     "catsquash": 1,
     "catharsis-editor": 0x851541,
-    "cats-file-format": 1,
     "craftlight": 0xfcfd97,
-    "resourcepacks": 0x55ff55
+    "resourcepacks": 0x55ff55,
+    "tooltipthingy": 0xc6a0f6
 }
 
 export const abbreviations: { [project: string]: string }  = {
@@ -68,7 +68,8 @@ export const abbreviations: { [project: string]: string }  = {
     "skybridge": "bridge",
     "cats-file-format": "cats-file-format",
     "catsquash": "catsquash",
-    "craftlight": "craftlight"
+    "craftlight": "craftlight",
+    "tooltipthingy": "tooltipthingy"
 }
 
 export function createAll() {
