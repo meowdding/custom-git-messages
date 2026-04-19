@@ -2,7 +2,7 @@ export const projects: {
   [project: string]: {
     color?: number;
     abbreviations?: string;
-    allow_builds?: [string];
+    allow_builds?: string[];
   };
 } = {
   "custom-git-messages": {
@@ -12,6 +12,7 @@ export const projects: {
   "skyblock-pv": {
     color: 0xf6b8d0,
     abbreviations: "pv",
+    allow_builds: ["master"],
   },
   "skyblock-pv-backend": {
     color: 0xfc5203,
@@ -20,18 +21,22 @@ export const projects: {
   skycubed: {
     color: 0xd1feb8,
     abbreviations: "sc",
+    allow_builds: ["master"],
   },
   customscoreboard: {
     color: 0xf1beb5,
     abbreviations: "cs",
+    allow_builds: ["main"],
   },
   skyocean: {
     color: 0xa4d8d8,
     abbreviations: "so",
+    allow_builds: ["main"],
   },
   "skyblock-rpc": {
     color: 0xf8c57c,
     abbreviations: "rpc",
+    allow_builds: ["master"],
   },
   skyblockapi: {
     color: 0xffffff,
@@ -57,6 +62,7 @@ export const projects: {
   "remote-configs": {},
   rewardclaim: {
     abbreviations: "rc",
+    allow_builds: ["master"],
   },
   repo: {
     abbreviations: "sbapi-repo",
@@ -75,6 +81,7 @@ export const projects: {
   "cosmetics-backend": {},
   catharsis: {
     color: 0xd21f64,
+    allow_builds: ["stable", "development"],
   },
   mortem: {
     color: 0xf08080,
@@ -83,6 +90,7 @@ export const projects: {
   skybridge: {
     color: 0xef161e,
     abbreviations: "bridge",
+    allow_builds: ["master"],
   },
   "cats-file-format": {},
   catsquash: {},
