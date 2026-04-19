@@ -59,6 +59,14 @@ export const Github = async (
     const message = await fn(body);
     const repo = message?.repo?.toLowerCase();
     if (!message || !repo || !projects[repo]) {
+      console.log(
+        "github: skipping message = ",
+        message,
+        ", repo = ",
+        repo,
+        ", project = ",
+        projects[repo || ""],
+      );
       continue;
     }
 
