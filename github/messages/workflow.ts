@@ -10,6 +10,7 @@ export const Workflow = async (
     return;
   }
 
+  const repoOwner = body.repository.owner.login;
   const repoName = body.repository.name;
   const headBranch = body.workflow_run.head_branch;
 
@@ -68,7 +69,7 @@ export const Workflow = async (
   description += `${artifacts.length} Artifact${artifacts.length === 1 ? "" : "s"} published\n`;
 
   artifacts.forEach((artifact) => {
-    description += `- [${artifact.name}]( https://meowdd.ing/download/${repoName}/${artifact.id})\n`;
+    description += `- [${artifact.name}](https://mods.meowdd.ing/${repoOwner}/${repoName}/${artifact.id})\n`;
   });
 
   return {
