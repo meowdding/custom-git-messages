@@ -66,6 +66,9 @@ export const Workflow = async (
 
   let description = "";
 
+  description += `Commit Message: ${"`"}${body.workflow_run.head_commit.message}${"`"}\n`;
+  description += `Branch: ${headBranch}`;
+
   description += `${artifacts.length} Artifact${artifacts.length === 1 ? "" : "s"} published\n`;
 
   artifacts.forEach((artifact) => {
@@ -77,13 +80,6 @@ export const Workflow = async (
       embeds: [
         {
           title: `${repoName} finished building!`,
-          fields: [
-            {
-              name: "Branch",
-              value: headBranch,
-              inline: true,
-            },
-          ],
           description: description,
           url: body.workflow_run.html_url,
         },

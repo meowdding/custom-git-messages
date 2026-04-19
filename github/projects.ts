@@ -81,7 +81,7 @@ export const projects: {
   "cosmetics-backend": {},
   catharsis: {
     color: 0xd21f64,
-    allow_builds: ["stable", "development"],
+    allow_builds: ["stable", "development", "feat/26.1"],
   },
   mortem: {
     color: 0xf08080,

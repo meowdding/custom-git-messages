@@ -21,6 +21,6 @@ export async function postWebhook(
   } else {
     url = prodUrl;
   }
-  console.log("posting to ", url);
+  console.log("posting to", url);
   await post(url || debugUrl, message, true);
 }
