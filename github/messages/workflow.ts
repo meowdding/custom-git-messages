@@ -65,8 +65,8 @@ export const Workflow = async (
   }
 
   let description = "";
-  description += `Branch: ${"`"}${headBranch}${"`"}\n\n`;
-  description += `### Commit Message\n${"```"}\n${body.workflow_run.head_commit.message.replace("`", /* wrap ` in zero width spaces */ "​`​")}\n${"```"}\n`;
+  description += `Branch: ${"`"}${headBranch}${"`"}\n`;
+  description += `Commit Message\n${"```"}\n${body.workflow_run.head_commit.message.replace("`", /* wrap ` in zero width spaces */ "​`​")}\n${"```"}\n`;
 
   description += `${artifacts.length} Artifact${artifacts.length === 1 ? "" : "s"} published\n`;
 
