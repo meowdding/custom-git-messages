@@ -14,15 +14,15 @@ export const Workflow = async (
   const repoName = body.repository.name;
   const headBranch = body.workflow_run.head_branch;
 
-  const isAllowedBranch =
-    projects[repoName.toLowerCase()]?.allow_builds?.includes(headBranch);
+  let project = projects[repoName.toLowerCase()];
+  const isAllowedBranch = project?.allow_builds?.includes(headBranch);
 
   if (isAllowedBranch === undefined || !isAllowedBranch) {
     console.log(
       "workflow_run/downloads:",
       headBranch,
       "not in",
-      projects[repoName.toLowerCase()]?.allow_builds,
+      project?.allow_builds,
     );
     return;
   }
@@ -43,12 +43,14 @@ export const Workflow = async (
     id: string;
   }[] = [];
 
+  let file_type = project.file_type || "jar";
+
   (artifactsResponse?.artifacts || []).forEach((artifact) => {
-    if (!artifact.name.endsWith(".jar")) {
+    if (!artifact.name.endsWith("." + file_type)) {
       console.log(
         "workflow_run/downloads: Skipping",
         artifact.name,
-        ", no jar!",
+        `, no ${file_type}!`,
       );
       return;
     }

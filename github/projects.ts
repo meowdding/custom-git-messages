@@ -3,6 +3,7 @@ export const projects: {
     color?: number;
     abbreviations?: string;
     allow_builds?: string[];
+    file_type?: string;
   };
 } = {
   "custom-git-messages": {
@@ -81,7 +82,7 @@ export const projects: {
   "cosmetics-backend": {},
   catharsis: {
     color: 0xd21f64,
-    allow_builds: ["stable", "development", "feat/26.1"],
+    allow_builds: ["stable", "development"],
   },
   mortem: {
     color: 0xf08080,
@@ -99,6 +100,8 @@ export const projects: {
   },
   resourcepacks: {
     color: 0x55ff55,
+    allow_builds: ["master"],
+    file_type: "zip",
   },
   tooltipthingy: {
     color: 0xc6a0f6,
