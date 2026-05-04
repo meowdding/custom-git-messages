@@ -1,6 +1,8 @@
 import { GithubMessage } from "../mod.ts";
 import { projects } from "../projects.ts";
 
+const defaultFileName = (x: string) => x.endsWith(".jar");
+
 //deno-lint-ignore no-explicit-any
 export const Workflow = async (
   body: any,
@@ -15,14 +17,23 @@ export const Workflow = async (
   const headBranch = body.workflow_run.head_branch;
 
   let project = projects[repoName.toLowerCase()];
-  const isAllowedBranch = project?.allow_builds?.includes(headBranch);
+  let allowedBranches = project?.allow_builds;
+  if (allowedBranches === undefined) {
+    console.log(
+      "workflow_run/downloads:",
+      repoName,
+      "doesn't allow for any branches to upload.",
+    );
+    return;
+  }
+
+  const isAllowedBranch = allowedBranches(headBranch);
 
   if (isAllowedBranch === undefined || !isAllowedBranch) {
     console.log(
       "workflow_run/downloads:",
       headBranch,
-      "not in",
-      project?.allow_builds,
+      "not in allowed branches",
     );
     return;
   }
@@ -43,14 +54,15 @@ export const Workflow = async (
     id: string;
   }[] = [];
 
-  let file_type = project.file_type || "jar";
+  let file_type: (name: string) => boolean =
+    project.file_filter || defaultFileName;
 
   (artifactsResponse?.artifacts || []).forEach((artifact) => {
-    if (!artifact.name.endsWith("." + file_type)) {
+    if (!file_type(artifact.name)) {
       console.log(
         "workflow_run/downloads: Skipping",
         artifact.name,
-        `, no ${file_type}!`,
+        `due to file type filter mismatch!`,
       );
       return;
     }

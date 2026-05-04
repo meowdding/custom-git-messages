@@ -1,9 +1,13 @@
+function branches(...branches: string[]): (branch: string) => boolean {
+  return (branch) => branches.includes(branch);
+}
+
 export const projects: {
   [project: string]: {
     color?: number;
     abbreviations?: string;
-    allow_builds?: string[];
-    file_type?: string;
+    allow_builds?: (branch: string) => boolean;
+    file_filter?: (file: string) => boolean;
   };
 } = {
   "custom-git-messages": {
@@ -13,7 +17,7 @@ export const projects: {
   "skyblock-pv": {
     color: 0xf6b8d0,
     abbreviations: "pv",
-    allow_builds: ["master"],
+    allow_builds: branches("master"),
   },
   "skyblock-pv-backend": {
     color: 0xfc5203,
@@ -22,22 +26,22 @@ export const projects: {
   skycubed: {
     color: 0xd1feb8,
     abbreviations: "sc",
-    allow_builds: ["master"],
+    allow_builds: branches("master"),
   },
   customscoreboard: {
     color: 0xf1beb5,
     abbreviations: "cs",
-    allow_builds: ["main"],
+    allow_builds: branches("main"),
   },
   skyocean: {
     color: 0xa4d8d8,
     abbreviations: "so",
-    allow_builds: ["main"],
+    allow_builds: branches("main"),
   },
   "skyblock-rpc": {
     color: 0xf8c57c,
     abbreviations: "rpc",
-    allow_builds: ["master"],
+    allow_builds: branches("master"),
   },
   skyblockapi: {
     color: 0xffffff,
@@ -63,7 +67,7 @@ export const projects: {
   "remote-configs": {},
   rewardclaim: {
     abbreviations: "rc",
-    allow_builds: ["master"],
+    allow_builds: branches("master"),
   },
   repo: {
     abbreviations: "sbapi-repo",
@@ -82,7 +86,7 @@ export const projects: {
   "cosmetics-backend": {},
   catharsis: {
     color: 0xd21f64,
-    allow_builds: ["stable", "development"],
+    allow_builds: branches("stable", "development"),
   },
   mortem: {
     color: 0xf08080,
@@ -91,7 +95,7 @@ export const projects: {
   skybridge: {
     color: 0xef161e,
     abbreviations: "bridge",
-    allow_builds: ["master"],
+    allow_builds: branches("master"),
   },
   "cats-file-format": {},
   catsquash: {},
@@ -100,12 +104,12 @@ export const projects: {
   },
   resourcepacks: {
     color: 0x55ff55,
-    allow_builds: ["master"],
-    file_type: "zip",
+    allow_builds: branches("master"),
+    file_filter: (_) => true,
   },
   tooltipthingy: {
     color: 0xc6a0f6,
     abbreviations: "ttt",
-    allow_builds: ["master"],
+    allow_builds: branches("master"),
   },
 };
