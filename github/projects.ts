@@ -112,4 +112,5 @@ export const projects: {
     abbreviations: "ttt",
     allow_builds: branches("master"),
   },
+  "repo-data": {}
 };
