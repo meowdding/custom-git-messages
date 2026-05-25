@@ -45,6 +45,8 @@ export const Github = async (
   const eventType = request.headers.get("X-GitHub-Event") || "";
   const eventId = request.headers.get("X-GitHub-Delivery") || "";
 
+  console.log("github: handling event ", eventType);
+
   const respond = kv.get(["ids", eventId]);
   const isRedelivered = (await respond).value != null;
   kv.set(["ids", eventId], "meow", { expireIn: 3 * 24 * 60 * 60 * 1000 });

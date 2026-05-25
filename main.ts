@@ -51,6 +51,8 @@ Deno.serve(
     const service =
       URL.parse(request.url)?.pathname.substring(1).split("/")[0] || "";
 
+    console.log("Recieved request from ", service);
+
     const fun = handlers[service] || NoMessage;
 
     const serviceMessages = await fun(body, request);
