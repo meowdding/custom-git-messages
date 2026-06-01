@@ -2,6 +2,7 @@ import { GithubMessage } from "../mod.ts";
 import { projects } from "../projects.ts";
 
 const defaultFileName = (x: string) => x.endsWith(".jar");
+const orgs = ["meowdding", "skyblockapi"];
 
 //deno-lint-ignore no-explicit-any
 export const Workflow = async (
@@ -11,7 +12,6 @@ export const Workflow = async (
     console.log("workflow_run/downloads: Not complete");
     return;
   }
-
   const repoOwner = body.repository.owner.login;
   const repoName = body.repository.name;
   const headBranch = body.workflow_run.head_branch;
@@ -35,6 +35,11 @@ export const Workflow = async (
       headBranch,
       "not in allowed branches",
     );
+    return;
+  }
+
+  if (!orgs.includes(body.workflow_run.head_repository.toLowerCase())) {
+    console.log("workflow_run/downloads: Completed but on pr!");
     return;
   }
 

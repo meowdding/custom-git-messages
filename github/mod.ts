@@ -45,7 +45,7 @@ export const Github = async (
   const eventType = request.headers.get("X-GitHub-Event") || "";
   const eventId = request.headers.get("X-GitHub-Delivery") || "";
 
-  console.log("github: handling event ", eventType);
+  console.log("github: handling event", eventType, eventId);
 
   const respond = kv.get(["ids", eventId]);
   const isRedelivered = (await respond).value != null;
