@@ -39,7 +39,7 @@ export const Workflow = async (
   }
 
   if (
-    !orgs.includes(body.workflow_run.head_repository.owner.name.toLowerCase())
+    !orgs.includes(body.workflow_run.head_repository.owner.login.toLowerCase())
   ) {
     console.log(
       "workflow_run/downloads: Completed but on pr!",
