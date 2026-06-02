@@ -38,8 +38,13 @@ export const Workflow = async (
     return;
   }
 
-  if (!orgs.includes(body.workflow_run.head_repository.toLowerCase())) {
-    console.log("workflow_run/downloads: Completed but on pr!");
+  if (
+    !orgs.includes(body.workflow_run.head_repository.owner.name.toLowerCase())
+  ) {
+    console.log(
+      "workflow_run/downloads: Completed but on pr!",
+      body.workflow_run.head_repository,
+    );
     return;
   }
 
