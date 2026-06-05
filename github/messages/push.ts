@@ -20,7 +20,7 @@ function buildDescription(commits: any[]): string {
     return message;
 }
 
-const allowedBranches = ["dev", "development"];
+const allowedBranches = ["master", "main", "dev", "development"];
 
 //deno-lint-ignore no-explicit-any
 export const Push = async (body: any): Promise<GithubMessage | undefined> => {
