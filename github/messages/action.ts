@@ -1,6 +1,6 @@
 import { GithubMessage } from "../mod.ts";
 
-const allowedBranches = ["master", "main", "dev", "development"];
+const allowedBranches = ["master", "main", "stable", "dev", "development"];
 
 //deno-lint-ignore no-explicit-any
 export const Action = (body: any): GithubMessage | undefined => {
