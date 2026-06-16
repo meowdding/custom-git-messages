@@ -107,6 +107,9 @@ export const projects: {
     allow_builds: branches("master"),
     file_filter: (_) => true,
   },
+  eureka: {
+    color: 0x55FFFF
+  },
   tooltipthingy: {
     color: 0xc6a0f6,
     abbreviations: "ttt",
