@@ -107,7 +107,7 @@ export const projects: {
     allow_builds: branches("master"),
     file_filter: (_) => true,
   },
-  eureka: {
+  "eureka-pack": {
     color: 0x55FFFF
   },
   tooltipthingy: {
