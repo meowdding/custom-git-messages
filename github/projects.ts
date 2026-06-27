@@ -8,6 +8,7 @@ export const projects: {
     abbreviations?: string;
     allow_builds?: (branch: string) => boolean;
     file_filter?: (file: string) => boolean;
+    forum_thread?: string;
   };
 } = {
   "custom-git-messages": {
@@ -18,6 +19,7 @@ export const projects: {
     color: 0xf6b8d0,
     abbreviations: "pv",
     allow_builds: branches("master"),
+    forum_thread: "1520292964470095872",
   },
   "skyblock-pv-backend": {
     color: 0xfc5203,
@@ -27,21 +29,25 @@ export const projects: {
     color: 0xd1feb8,
     abbreviations: "sc",
     allow_builds: branches("master"),
+    forum_thread: "1520292194274246739",
   },
   customscoreboard: {
     color: 0xf1beb5,
     abbreviations: "cs",
     allow_builds: branches("main"),
+    forum_thread: "1520293540465348729",
   },
   skyocean: {
     color: 0xa4d8d8,
     abbreviations: "so",
     allow_builds: branches("main"),
+    forum_thread: "1520292363971334215",
   },
   "skyblock-rpc": {
     color: 0xf8c57c,
     abbreviations: "rpc",
     allow_builds: branches("master"),
+    forum_thread: "1520293872696299521",
   },
   skyblockapi: {
     color: 0xffffff,
@@ -68,6 +74,7 @@ export const projects: {
   rewardclaim: {
     abbreviations: "rc",
     allow_builds: branches("master"),
+    forum_thread: "1520294891710713917",
   },
   repo: {
     abbreviations: "sbapi-repo",
@@ -87,6 +94,7 @@ export const projects: {
   catharsis: {
     color: 0xd21f64,
     allow_builds: branches("stable", "development", "feat/26.2"),
+    forum_thread: "1520291236655792211",
   },
   mortem: {
     color: 0xf08080,
@@ -96,6 +104,7 @@ export const projects: {
     color: 0xef161e,
     abbreviations: "bridge",
     allow_builds: branches("master"),
+    forum_thread: "1520295096610721912",
   },
   "cats-file-format": {},
   catsquash: {},
@@ -106,14 +115,16 @@ export const projects: {
     color: 0x55ff55,
     allow_builds: branches("master"),
     file_filter: (_) => true,
+    forum_thread: "1520294574516469760",
   },
   "eureka-pack": {
-    color: 0x55FFFF
+    color: 0x55ffff,
   },
   tooltipthingy: {
     color: 0xc6a0f6,
     abbreviations: "ttt",
     allow_builds: branches("master"),
+    forum_thread: "1520291815524270214",
   },
-  "repo-data": {}
+  "repo-data": {},
 };

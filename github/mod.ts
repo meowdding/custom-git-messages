@@ -14,9 +14,7 @@ import { WebhookMessage } from "https://deno.land/x/dishooks@v1.1.0/types.ts";
 import { Create } from "./messages/create.ts";
 import { Workflow } from "./messages/workflow.ts";
 
-const actions: HandlerList<
-  Promise<GithubMessage | undefined> | (GithubMessage | undefined)
-> = {
+const actions: HandlerList<Promise<GithubMessage | undefined> | (GithubMessage | undefined)> = {
   fork: Fork,
   push: Push,
   star: Star,
@@ -30,11 +28,18 @@ const actions: HandlerList<
   workflow_run: [Action, Workflow],
 };
 
-export type GithubMessage = {
-  message: WebhookMessage;
-  repo: string;
-  type?: "log" | "download";
-};
+export type GithubMessage =
+  | {
+      message: WebhookMessage;
+      repo: string;
+      type?: "log";
+    }
+  | {
+      message: WebhookMessage;
+      repo: string;
+      type: "download";
+      forum_thread: string;
+    };
 
 export const Github = async (
   //deno-lint-ignore no-explicit-any
@@ -61,14 +66,7 @@ export const Github = async (
     const message = await fn(body);
     const repo = message?.repo?.toLowerCase();
     if (!message || !repo || !projects[repo]) {
-      console.log(
-        "github: skipping message = ",
-        message,
-        ", repo = ",
-        repo,
-        ", project = ",
-        projects[repo || ""],
-      );
+      console.log("github: skipping message = ", message, ", repo = ", repo, ", project = ", projects[repo || ""]);
       continue;
     }
 
@@ -87,6 +85,7 @@ export const Github = async (
       message: webhookMessage,
       isRedelivered: isRedelivered,
       isDownload: message.type === "download",
+      forum_thread: message.type === "download" ? message.forum_thread : undefined,
     });
   }
 

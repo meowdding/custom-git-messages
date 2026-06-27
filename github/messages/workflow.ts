@@ -5,9 +5,7 @@ const defaultFileName = (x: string) => x.endsWith(".jar");
 const orgs = ["meowdding", "skyblockapi"];
 
 //deno-lint-ignore no-explicit-any
-export const Workflow = async (
-  body: any,
-): Promise<GithubMessage | undefined> => {
+export const Workflow = async (body: any): Promise<GithubMessage | undefined> => {
   if (body.action !== "completed") {
     console.log("workflow_run/downloads: Not complete");
     return;
@@ -19,32 +17,19 @@ export const Workflow = async (
   let project = projects[repoName.toLowerCase()];
   let allowedBranches = project?.allow_builds;
   if (allowedBranches === undefined) {
-    console.log(
-      "workflow_run/downloads:",
-      repoName,
-      "doesn't allow for any branches to upload.",
-    );
+    console.log("workflow_run/downloads:", repoName, "doesn't allow for any branches to upload.");
     return;
   }
 
   const isAllowedBranch = allowedBranches(headBranch);
 
   if (isAllowedBranch === undefined || !isAllowedBranch) {
-    console.log(
-      "workflow_run/downloads:",
-      headBranch,
-      "not in allowed branches",
-    );
+    console.log("workflow_run/downloads:", headBranch, "not in allowed branches");
     return;
   }
 
-  if (
-    !orgs.includes(body.workflow_run.head_repository.owner.login.toLowerCase())
-  ) {
-    console.log(
-      "workflow_run/downloads: Completed but on pr!",
-      body.workflow_run.head_repository,
-    );
+  if (!orgs.includes(body.workflow_run.head_repository.owner.login.toLowerCase())) {
+    console.log("workflow_run/downloads: Completed but on pr!", body.workflow_run.head_repository);
     return;
   }
 
@@ -53,9 +38,7 @@ export const Workflow = async (
     return;
   }
 
-  let artifactsResponse = await fetch(body.workflow_run.artifacts_url).then(
-    (x) => x.json(),
-  );
+  let artifactsResponse = await fetch(body.workflow_run.artifacts_url).then((x) => x.json());
 
   console.log("workflow_run/downloads: Fetched artifacts", artifactsResponse);
 
@@ -64,16 +47,11 @@ export const Workflow = async (
     id: string;
   }[] = [];
 
-  let file_type: (name: string) => boolean =
-    project.file_filter || defaultFileName;
+  let file_type: (name: string) => boolean = project.file_filter || defaultFileName;
 
   (artifactsResponse?.artifacts || []).forEach((artifact) => {
     if (!file_type(artifact.name)) {
-      console.log(
-        "workflow_run/downloads: Skipping",
-        artifact.name,
-        `due to file type filter mismatch!`,
-      );
+      console.log("workflow_run/downloads: Skipping", artifact.name, `due to file type filter mismatch!`);
       return;
     }
     console.log("workflow_run/downloads: Adding", artifact.name);
@@ -110,5 +88,6 @@ export const Workflow = async (
     },
     repo: repoName,
     type: "download",
+    forum_thread: project.forum_thread || "1520295375834058782",
   };
 };

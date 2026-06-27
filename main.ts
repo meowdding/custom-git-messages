@@ -18,15 +18,13 @@ export type ServiceResponse =
       message: WebhookMessage;
       isRedelivered: boolean;
       isDownload: boolean;
+      forum_thread?: string;
     }
   | undefined;
 
 type ServiceList = {
   // deno-lint-ignore no-explicit-any
-  [route: string]: (
-    body: any,
-    request: any,
-  ) => Promise<ServiceResponse> | Promise<ServiceResponse[] | undefined>;
+  [route: string]: (body: any, request: any) => Promise<ServiceResponse> | Promise<ServiceResponse[] | undefined>;
 };
 
 // deno-lint-ignore no-explicit-any
@@ -48,8 +46,7 @@ Deno.serve(
 
     const body = await request.json();
 
-    const service =
-      URL.parse(request.url)?.pathname.substring(1).split("/")[0] || "";
+    const service = URL.parse(request.url)?.pathname.substring(1).split("/")[0] || "";
 
     console.log("Recieved request from ", service);
 
@@ -57,20 +54,13 @@ Deno.serve(
 
     const serviceMessages = await fun(body, request);
     console.log("Service Messages:", serviceMessages);
-    if (!serviceMessages)
-      return new Response(`{"_":"no_message"}`, { status: 200 });
-    let messages = Array.isArray(serviceMessages)
-      ? serviceMessages
-      : [serviceMessages];
+    if (!serviceMessages) return new Response(`{"_":"no_message"}`, { status: 200 });
+    let messages = Array.isArray(serviceMessages) ? serviceMessages : [serviceMessages];
     console.log("Messages:", messages);
     for (let message of messages) {
       console.log("posting ", message);
       if (!message) continue;
-      await postWebhook(
-        message.message,
-        message.isRedelivered,
-        message.isDownload,
-      );
+      await postWebhook(message);
     }
 
     return new Response("{}", { status: 200 });
