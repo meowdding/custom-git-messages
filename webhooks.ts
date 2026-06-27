@@ -16,7 +16,7 @@ export async function postWebhook(message: ServiceResponse) {
   if (message.isRedelivered) {
     url = debugUrl;
   } else if (message.isDownload && message.forum_thread) {
-    url = `${downloadUrl}?thread_id=${message.forum_thread}`;
+    url = `${downloadForumUrl}?thread_id=${message.forum_thread}`;
   } else {
     url = prodUrl;
   }
