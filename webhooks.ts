@@ -13,7 +13,7 @@ export async function postWebhook(message: ServiceResponse) {
   }
   let url;
 
-  if (message.isRedelivered) {
+  if (message.isRedelivered && !message.isDownload) {
     url = debugUrl;
   } else if (message.isDownload && message.forum_thread) {
     url = `${downloadForumUrl}?thread_id=${message.forum_thread}`;
