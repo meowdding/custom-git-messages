@@ -8,6 +8,7 @@ export const projects: {
     abbreviations?: string;
     allow_builds?: (branch: string) => boolean;
     file_filter?: (file: string) => boolean;
+    push_branches?: (branch: string) => boolean;
     forum_thread?: string;
   };
 } = {
@@ -127,4 +128,8 @@ export const projects: {
     forum_thread: "1520291815524270214",
   },
   "repo-data": {},
+  "hypixel-pack": {
+    color: 0xfdcc4b,
+    push_branches: branches("26.2", "alpha/26.2"),
+  },
 };
