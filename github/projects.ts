@@ -132,4 +132,5 @@ export const projects: {
     color: 0xfdcc4b,
     push_branches: branches("26.2", "alpha/26.2"),
   },
+  "hypixel-pack-website": {},
 };
