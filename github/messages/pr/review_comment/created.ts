@@ -1,4 +1,4 @@
-import { truncate } from "../../../../github/utils.ts";
+import { truncate, hideDetailsBlock } from "../../../../github/utils.ts";
 import { GithubMessage } from "../../../mod.ts";
 
 //deno-lint-ignore no-explicit-any
@@ -16,7 +16,7 @@ export const Created = (body: any): GithubMessage => {
             embeds: [
                 {
                     title: `Commented on #${prNumber} ${prTitle}`,
-                    description: truncate(body.comment.body, 4096),
+                    description: truncate(hideDetailsBlock(body.comment.body), 4096),
                     url: prUrl,
                     author: {
                         name: author,

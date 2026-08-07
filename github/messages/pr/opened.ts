@@ -1,4 +1,4 @@
-import { truncate } from "../../../github/utils.ts";
+import { truncate, hideDetailsBlock } from "../../../github/utils.ts";
 import { GithubMessage } from "../../mod.ts";
 
 const orgs = ["meowdding", "skyblockapi"];
@@ -53,7 +53,7 @@ export const Opened = (body: any): GithubMessage => {
                         `
                     From [${headPath}](${headUrl}) into [${basePath}](${baseUrl}). ([diff](${compareUrl}))
                     
-                    ${prBody.trim()}
+                    ${hideDetailsBlock(prBody.trim())}
                     `,
                         4096,
                     ),
