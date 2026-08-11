@@ -53,7 +53,7 @@ export const Opened = (body: any): GithubMessage => {
                         `
                     From [${headPath}](${headUrl}) into [${basePath}](${baseUrl}). ([diff](${compareUrl}))
                     
-                    ${hideDetailsBlock(prBody.trim())}
+                    ${hideDetailsBlock(prBody.trim()) ?? ""}
                     `,
                         4096,
                     ),
