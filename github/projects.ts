@@ -41,7 +41,7 @@ export const projects: {
   skyocean: {
     color: 0xa4d8d8,
     abbreviations: "so",
-    allow_builds: branches("main"),
+    allow_builds: branches("main", "feat/rarity-outlines"),
     forum_thread: "1520292363971334215",
   },
   "skyblock-rpc": {
