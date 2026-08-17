@@ -47,6 +47,21 @@ export const Push = async (body: any): Promise<GithubMessage | undefined> => {
   }
   const url = body.compare;
 
+  // Force Pushes
+  if (body.forced) {
+    return {
+      message: {
+        embeds: [
+          {
+            url: url,
+            title: `${committer} force pushed to ${repoName}`
+          },
+        ],
+      },
+      repo: repoName,
+    };
+  }
+
   const response = await kv.get([repoName, "merged", body.after]);
   const isMerge = response.value != null;
   if (isMerge) return;
