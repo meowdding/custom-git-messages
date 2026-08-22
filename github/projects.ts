@@ -133,4 +133,5 @@ export const projects: {
     push_branches: branches("26.2", "alpha/26.2"),
   },
   "hypixel-pack-website": {},
+  "repo-lib-rs": {},
 };
