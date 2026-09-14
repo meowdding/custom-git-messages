@@ -19,7 +19,7 @@ export const projects: {
   "skyblock-pv": {
     color: 0xf6b8d0,
     abbreviations: "pv",
-    allow_builds: branches("master"),
+    allow_builds: branches("master", "feat/26.3"),
     forum_thread: "1520292964470095872",
   },
   "skyblock-pv-backend": {
@@ -29,7 +29,7 @@ export const projects: {
   skycubed: {
     color: 0xd1feb8,
     abbreviations: "sc",
-    allow_builds: branches("master"),
+    allow_builds: branches("master", "feat/26.3"),
     forum_thread: "1520292194274246739",
   },
   customscoreboard: {
@@ -41,7 +41,7 @@ export const projects: {
   skyocean: {
     color: 0xa4d8d8,
     abbreviations: "so",
-    allow_builds: branches("main", "feat/rarity-outlines"),
+    allow_builds: branches("main", "feat/26.3"),
     forum_thread: "1520292363971334215",
   },
   "skyblock-rpc": {
