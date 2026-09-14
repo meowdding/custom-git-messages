@@ -2,6 +2,12 @@ function branches(...branches: string[]): (branch: string) => boolean {
   return (branch) => branches.includes(branch);
 }
 
+const port: ((branch: string) => boolean) = (branch: string) => branch.startsWith("port/");
+
+function any(...conditions: ((branch: string) => boolean)[]): (branch: string) => boolean {
+  return (branch) => conditions.some((con) => con(branch));
+}
+
 export const projects: {
   [project: string]: {
     color?: number;
@@ -19,7 +25,7 @@ export const projects: {
   "skyblock-pv": {
     color: 0xf6b8d0,
     abbreviations: "pv",
-    allow_builds: branches("master", "feat/26.3"),
+    allow_builds: any(branches("master"), port),
     forum_thread: "1520292964470095872",
   },
   "skyblock-pv-backend": {
@@ -29,25 +35,25 @@ export const projects: {
   skycubed: {
     color: 0xd1feb8,
     abbreviations: "sc",
-    allow_builds: branches("master", "feat/26.3"),
+    allow_builds: any(branches("master"), port),
     forum_thread: "1520292194274246739",
   },
   customscoreboard: {
     color: 0xf1beb5,
     abbreviations: "cs",
-    allow_builds: branches("main"),
+    allow_builds: any(branches("master"), port),
     forum_thread: "1520293540465348729",
   },
   skyocean: {
     color: 0xa4d8d8,
     abbreviations: "so",
-    allow_builds: branches("main", "feat/26.3"),
+    allow_builds: any(branches("master"), port),
     forum_thread: "1520292363971334215",
   },
   "skyblock-rpc": {
     color: 0xf8c57c,
     abbreviations: "rpc",
-    allow_builds: branches("master"),
+    allow_builds: any(branches("master"), port),
     forum_thread: "1520293872696299521",
   },
   skyblockapi: {
@@ -74,7 +80,7 @@ export const projects: {
   "remote-configs": {},
   rewardclaim: {
     abbreviations: "rc",
-    allow_builds: branches("master"),
+    allow_builds: any(branches("master"), port),
     forum_thread: "1520294891710713917",
   },
   repo: {
@@ -94,7 +100,7 @@ export const projects: {
   "cosmetics-backend": {},
   catharsis: {
     color: 0xd21f64,
-    allow_builds: branches("main", "feat/26.3"),
+    allow_builds: any(branches("master"), port),
     forum_thread: "1520291236655792211",
   },
   mortem: {
@@ -104,7 +110,7 @@ export const projects: {
   skybridge: {
     color: 0xef161e,
     abbreviations: "bridge",
-    allow_builds: branches("master"),
+    allow_builds: any(branches("master"), port),
     forum_thread: "1520295096610721912",
   },
   "cats-file-format": {},
@@ -114,7 +120,7 @@ export const projects: {
   },
   resourcepacks: {
     color: 0x55ff55,
-    allow_builds: branches("master"),
+    allow_builds: any(branches("master"), port),
     file_filter: (_) => true,
     forum_thread: "1520294574516469760",
   },
@@ -124,7 +130,7 @@ export const projects: {
   tooltipthingy: {
     color: 0xc6a0f6,
     abbreviations: "ttt",
-    allow_builds: branches("master"),
+    allow_builds: bany(branches("master"), port),
     forum_thread: "1520291815524270214",
   },
   "repo-data": {},
