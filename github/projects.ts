@@ -130,7 +130,7 @@ export const projects: {
   tooltipthingy: {
     color: 0xc6a0f6,
     abbreviations: "ttt",
-    allow_builds: bany(branches("master"), port),
+    allow_builds: any(branches("master"), port),
     forum_thread: "1520291815524270214",
   },
   "repo-data": {},
