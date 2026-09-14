@@ -94,7 +94,7 @@ export const projects: {
   "cosmetics-backend": {},
   catharsis: {
     color: 0xd21f64,
-    allow_builds: branches("main"),
+    allow_builds: branches("main", "feat/26.3"),
     forum_thread: "1520291236655792211",
   },
   mortem: {
