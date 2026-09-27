@@ -41,13 +41,13 @@ export const projects: {
   customscoreboard: {
     color: 0xf1beb5,
     abbreviations: "cs",
-    allow_builds: any(branches("master"), port),
+    allow_builds: any(branches("main"), port),
     forum_thread: "1520293540465348729",
   },
   skyocean: {
     color: 0xa4d8d8,
     abbreviations: "so",
-    allow_builds: any(branches("master"), port),
+    allow_builds: any(branches("main"), port),
     forum_thread: "1520292363971334215",
   },
   "skyblock-rpc": {
@@ -100,7 +100,7 @@ export const projects: {
   "cosmetics-backend": {},
   catharsis: {
     color: 0xd21f64,
-    allow_builds: any(branches("master"), port),
+    allow_builds: any(branches("main"), port),
     forum_thread: "1520291236655792211",
   },
   mortem: {
