@@ -1,9 +1,11 @@
 import { WebhookMessage } from "https://deno.land/x/dishooks@v1.1.0/types.ts";
 import { postWebhook } from "./webhooks.ts";
 import { Github } from "./github/mod.ts";
+import { Nexus } from "./nexus/mod.ts";
 
 const handlers: ServiceList = {
   github: Github,
+  nexus: Nexus,
 };
 
 // deno-lint-ignore no-unused-vars no-explicit-any
