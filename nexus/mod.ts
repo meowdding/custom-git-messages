@@ -1,4 +1,4 @@
-import { ServiceResponse } from "../main";
+import { ServiceResponse } from "../main.ts";
 
 export const Nexus = async (
   //deno-lint-ignore no-explicit-any
