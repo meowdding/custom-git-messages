@@ -57,7 +57,7 @@ export const projects: {
     forum_thread: "1520293872696299521",
   },
   skyblockapi: {
-    color: 0xffffff,
+    color: 0xfffffe,
     abbreviations: "api",
   },
   "meowdding-lib": {
