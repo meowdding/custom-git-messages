@@ -1,6 +1,6 @@
-import { githubToken } from "../main";
-import { mappings } from "./compoent_mappings";
-import { NexusMessage } from "./mod";
+import { githubToken } from "../main.ts";
+import { mappings } from "./compoent_mappings.ts";
+import { NexusMessage } from "./mod.ts";
 import { parse, stringify } from "jsr:@std/toml";
 
 //deno-lint-ignore no-explicit-any
