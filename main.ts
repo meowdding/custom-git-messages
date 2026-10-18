@@ -3,6 +3,8 @@ import { postWebhook } from "./webhooks.ts";
 import { Github } from "./github/mod.ts";
 import { Nexus } from "./nexus/mod.ts";
 
+export const githubToken = Deno.env.get("github_token");
+
 const handlers: ServiceList = {
   github: Github,
   nexus: Nexus,
