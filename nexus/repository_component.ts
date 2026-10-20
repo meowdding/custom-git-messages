@@ -7,15 +7,24 @@ import { parse, stringify } from "jsr:@std/toml";
 export const Component = async (body: any): Promise<NexusMessage | undefined> => {
   const component = body.component;
 
-  if (!component) return;
-  if (component.format !== "maven2") return;
+  if (!component) {
+    console.log("nexus/Component: skipping message, no component");
+    return;
+  }
+  if (component.format !== "maven2") {
+    console.log("nexus/Component: skipping message, not maven2", component);
+    return;
+  }
   const group = component.group;
   const name = component.name;
   const version: string = component.version;
   const groupAndName = `${group}:${name}`;
 
   const config = mappings[groupAndName];
-  if (!config) return;
+  if (!config) {
+    console.log("nexus/Component: skipping message, no mapping for", groupAndName);
+    return;
+  }
 
   const updates = config.updates || [];
 
