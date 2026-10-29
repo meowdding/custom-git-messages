@@ -18,7 +18,7 @@ export const Nexus = async (
   request: any,
 ): Promise<ServiceResponse[] | undefined> => {
   console.log("nexus: data", body, request);
-  const eventType = request.headers.get("x-nexus-webhook-delivery") || "";
+  const eventType = request.headers.get("x-nexus-webhook-id") || "";
 
   console.log("nexus: handling event", eventType);
 
