@@ -23,4 +23,15 @@ export const mappings: {
       },
     ],
   },
+  "me.owdding.meowdding-lib:meowdding-lib": {
+    abbreviations: "mlib",
+    color: 0x957dad,
+    updates: [
+      {
+        owner: "meowdding",
+        repo: "skyocean",
+        versionKey: "meowdding-lib",
+      },
+    ],
+  }
 };
