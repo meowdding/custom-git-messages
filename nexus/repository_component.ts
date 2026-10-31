@@ -38,16 +38,16 @@ export const Component = async (body: any): Promise<NexusMessage | undefined> =>
         continue
       }
 
-      const body = await res.json();
-      const sha = body["sha"];
-      const file = body["content"];
+      const resBody = await res.json();
+      const sha = resBody["sha"];
+      const file = resBody["content"];
       const rawFile = atob(file);
 
       const data = parse(rawFile);
       data["versions"][x.versionKey || name] = version;
 
       const rawData = btoa(stringify(data));
-      const body = {
+      const reqBody = {
         message: `chore: bump ${x.versionKey || name} to \`${version}\``,
         committer: {
           name: "Meowtomation",
@@ -57,7 +57,7 @@ export const Component = async (body: any): Promise<NexusMessage | undefined> =>
         sha: sha,
       };
       
-      console.log("nexus/Component: Trying to send update!", body);
+      console.log("nexus/Component: Trying to send update!", reqBody);
       fetch(`https://api.github.com/repos/${x.owner}/${x.repo}/contents/${x.path || "gradle/libs.versions.toml"}`, {
         method: "PUT",
         headers: {
@@ -65,7 +65,7 @@ export const Component = async (body: any): Promise<NexusMessage | undefined> =>
           Accept: "application/vnd.github+json",
           "X-GitHub-Api-Version": "2026-03-10",
         },
-        body: JSON.stringify(body),
+        body: JSON.stringify(reqBody),
       });
     }
 
