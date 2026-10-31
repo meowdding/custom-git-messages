@@ -33,5 +33,16 @@ export const mappings: {
         versionKey: "meowdding-lib",
       },
     ],
+  },
+  "me.owdding.repo:remote-repo": {
+    abbreviations: "remote-repo",
+    color: 0x957dad,
+    updates: [
+      {
+        owner: "meowdding",
+        repo: "meowdding-lib",
+        versionKey: "meowdding-remote-repo",
+      },
+    ],
   }
 };
