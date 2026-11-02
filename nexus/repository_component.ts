@@ -42,6 +42,7 @@ export const Component = async (body: any): Promise<NexusMessage | undefined> =>
       const file = resBody["content"];
       const rawFile = atob(file);
 
+      const key = x.versionKey || name;
       const rawData = btoa(rawFile.replace(String.raw`/^${key}\s*=\s*".*?"$/`, `${key} = "${version}"`));
       
       const reqBody = {
