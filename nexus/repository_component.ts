@@ -1,7 +1,6 @@
 import { githubToken } from "../main.ts";
 import { mappings } from "./compoent_mappings.ts";
 import { NexusMessage } from "./mod.ts";
-import { parse, stringify } from "jsr:@std/toml";
 
 //deno-lint-ignore no-explicit-any
 export const Component = async (body: any): Promise<NexusMessage | undefined> => {
@@ -43,10 +42,8 @@ export const Component = async (body: any): Promise<NexusMessage | undefined> =>
       const file = resBody["content"];
       const rawFile = atob(file);
 
-      const data = parse(rawFile);
-      data["versions"][x.versionKey || name] = version;
-
-      const rawData = btoa(stringify(data));
+      const rawData = btoa(rawFile.replace(String.raw`/^${key}\s*=\s*".*?"$/`, `${key} = "${version}"`));
+      
       const reqBody = {
         message: `chore: bump ${x.versionKey || name} to \`${version}\``,
         committer: {
