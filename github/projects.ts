@@ -127,9 +127,9 @@ export const projects: {
   "eureka-pack": {
     color: 0x55ffff,
   },
-  tooltipthingy: {
+  iconographic: {
     color: 0xc6a0f6,
-    abbreviations: "ttt",
+    abbreviations: "icono",
     allow_builds: any(branches("master"), port),
     forum_thread: "1520291815524270214",
   },
