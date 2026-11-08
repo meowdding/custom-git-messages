@@ -44,6 +44,8 @@ export const Component = async (body: any): Promise<NexusMessage | undefined> =>
 
       const key = x.versionKey || name;
       const rawData = btoa(rawFile.replace(new RegExp(String.raw`/^${key}\s*=\s*".*?"$/`, "gm"), `${key} = "${version}"`));
+
+      if (rawData === file) continue;
       
       const reqBody = {
         message: `chore: bump ${x.versionKey || name} to \`${version}\``,
