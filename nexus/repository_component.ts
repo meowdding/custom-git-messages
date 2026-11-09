@@ -43,7 +43,7 @@ export const Component = async (body: any): Promise<NexusMessage | undefined> =>
       const rawFile = atob(file);
 
       const key = x.versionKey || name;
-      const rawData = btoa(rawFile.replace(new RegExp(String.raw`/^${key}\s*=\s*".*?"$/`, "gm"), `${key} = "${version}"`));
+      const rawData = btoa(rawFile.replace(new RegExp(String.raw`^${key}\s*=\s*".*?"$`, "gm"), `${key} = "${version}"`));
 
       if (rawData === file) continue;
       
