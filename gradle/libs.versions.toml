@@ -1,0 +1,28 @@
+[versions]
+kotlin = "2.4.20"
+logback = "1.6.3"
+prometheus = "1.17.1"
+
+kt-serialization = "2.4.0"
+kt-serialization-json = "1.12.0"
+ktmodules = "1.0.9"
+ksp = "2.3.10"
+kord = "feature-dependency-bump-SNAPSHOT"
+
+kedis = "0.0.12"
+[libraries]
+kt-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kt-serialization-json" }
+
+logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
+micrometer-registryPrometheus = { module = "io.micrometer:micrometer-registry-prometheus", version.ref = "prometheus" }
+
+kedis = { module = "io.github.domgew:kedis", version.ref = "kedis" }
+modules = { module = "me.owdding.ktmodules:KtModules", version.ref = "ktmodules" }
+kord-rest = { module = "dev.kord:kord-rest", version.ref = "kord" }
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kt-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kt-serialization" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
